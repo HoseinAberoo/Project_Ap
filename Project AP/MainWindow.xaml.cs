@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_AP.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,20 @@ namespace Project_AP
             CarPlate.Text = string.Empty;
             NumofPassenger.SelectedIndex = 0;
             Pass_Age.Text = string.Empty;
+        }
+        private void Save_Method()
+        {
+            var user = new UserInfo();
+            user.FirstName = FirstName.ToString();
+            user.LastName = LastName.ToString();
+            user.NationalCode = Convert.ToInt32(NationalCode);
+            user.CarBrand = CarBrand.ToString();
+            user.CarDate = Convert.ToInt32(CarDate);
+            user.CarPlate = CarPlate.ToString();
+            user.NumPass = Convert.ToInt32(NumofPassenger);
+
+            
+            
         }
 
         public MainWindow()
