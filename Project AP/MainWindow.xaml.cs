@@ -1,5 +1,6 @@
 ﻿using Project_AP.Class;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Project_AP
 
     public partial class MainWindow : Window
     {
+        string path = @"c:C:\Users\hosei\source\repos\Project AP\Files\Files.txt";
         private void Refresh_Method()
         {
             FirstName.Text = string.Empty;
@@ -38,11 +40,13 @@ namespace Project_AP
             var user = new UserInfo();
             user.FirstName = FirstName.ToString();
             user.LastName = LastName.ToString();
-            user.NationalCode = Convert.ToInt32(NationalCode);
+            user.NationalCode = NationalCode.ToString();
             user.CarBrand = CarBrand.ToString();
-            user.CarDate = Convert.ToInt32(CarDate);
+            user.CarDate = CarDate.ToString();
             user.CarPlate = CarPlate.ToString();
-            user.NumPass = Convert.ToInt32(NumofPassenger);
+            user.NumPass = NumofPassenger.ToString();
+            user.PassAge = Pass_Age.ToString();
+            File.AppendAllText(path, user.FirstName);
 
             
             
@@ -56,6 +60,7 @@ namespace Project_AP
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            Save_Method();
             Refresh_Method();
         }
 
