@@ -1,0 +1,15 @@
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.csprojAssemblyReference.cache
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\MainWindow.baml
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\MainWindow.g.cs
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\App.g.cs
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP_MarkupCompile.cache
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.g.resources
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project_AP.Properties.Resources.resources
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.csproj.GenerateResource.cache
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.csproj.CoreCompileInputs.cache
+C:\Users\hosei\source\repos\Project AP\Project AP\bin\Debug\Project AP.exe.config
+C:\Users\hosei\source\repos\Project AP\Project AP\bin\Debug\Project AP.exe
+C:\Users\hosei\source\repos\Project AP\Project AP\bin\Debug\Project AP.pdb
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP_MarkupCompile.lref
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.exe
+C:\Users\hosei\source\repos\Project AP\Project AP\obj\Debug\Project AP.pdb
