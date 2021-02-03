@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CsvHelper;
+using System.Globalization;
+using CsvHelper.Configuration;
 
 namespace Project_AP
 {
@@ -23,7 +26,7 @@ namespace Project_AP
 
     public partial class MainWindow : Window
     {
-        string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.txt";
+        string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.csv";
         private void Refresh_Method()
         {
             FirstName.Text = string.Empty;
@@ -40,28 +43,46 @@ namespace Project_AP
             using (StreamWriter sw = File.AppendText(path))
             {
                 sw.WriteLine(text);
-                
+
             }
         }
         private void Save_Method()
         {
-            var user = new UserInfo();
-            user.FirstName = FirstName.ToString().Remove(0, 33);
-            user.LastName = LastName.ToString().Remove(0, 33);
-            user.NationalCode = NationalCode.ToString().Remove(0, 33);
-            user.CarBrand = CarBrand.ToString().Remove(0, 33);
-            user.CarDate = CarDate.ToString().Remove(0, 33);
-            user.CarPlate = CarPlate.ToString().Remove(0, 33);
-            user.NumPass = NumofPassenger.ToString().Remove(0, 45);
-            user.PassAge = Pass_Age.ToString().Remove(0, 33);
-            Append_Method(user.FirstName);
-            Append_Method(user.LastName);
-            Append_Method(user.NationalCode);
-            Append_Method(user.CarBrand);
-            Append_Method(user.CarDate);
-            Append_Method(user.CarPlate);
-            Append_Method(user.NumPass);
-            Append_Method(user.PassAge);
+            // TODO: Ensure headers.
+
+            var user = new List<UserInfo>
+            {
+                new UserInfo {
+                    FirstName    = FirstName.Text.ToString(),
+                    LastName     = LastName.Text.ToString(),
+                    NationalCode = NationalCode.Text.ToString(),
+                    CarBrand     = CarBrand.Text.ToString(),
+                    CarDate      = CarDate.Text.ToString(),
+                    CarPlate     = CarPlate.Text.ToString(),
+                    NumPass      = NumofPassenger.Text.ToString(),
+                    PassAge      = Pass_Age.Text.ToString()
+                },
+            };
+           
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                // Don't write the header again.
+                HasHeaderRecord = false,
+            };
+            using (var stream = File.Open(path, FileMode.Append))
+            using (var writer = new StreamWriter(stream))
+            using (var csv = new CsvWriter(writer, config))
+            {
+                csv.WriteRecords(user);
+            }
+            //user.FirstName = FirstName.ToString().Remove(0, 33);
+            //user.LastName = LastName.ToString().Remove(0, 33);
+            //user.NationalCode = NationalCode.ToString().Remove(0, 33);
+            //user.CarBrand = CarBrand.ToString().Remove(0, 33);
+            //user.CarDate = CarDate.ToString().Remove(0, 33);
+            //user.CarPlate = CarPlate.ToString().Remove(0, 33);
+            //user.NumPass = NumofPassenger.ToString().Remove(0, 45);
+            ////user.PassAge = Pass_Age.ToString().Remove(0, 33);
 
         }
 
