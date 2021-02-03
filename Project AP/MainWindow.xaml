@@ -62,7 +62,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="CarBrand" Grid.Column="0" Margin="5 2 5 2"/>
                             <TextBox x:Name="CarDate" Grid.Column="1" Margin="5 2 5 2"/>
-                            <TextBox x:Name="CarPlate" Grid.Column="2" Margin="5 2 5 2"/>
+                            <TextBox x:Name="CarPlate" Grid.Column="2" Margin="5 2 5 2" MaxLength="8"/>
 
                         </Grid>
                         <Grid Margin="15 0 10 0">

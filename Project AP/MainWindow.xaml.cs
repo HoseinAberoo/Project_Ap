@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using CsvHelper;
 using System.Globalization;
 using CsvHelper.Configuration;
+using System.Text.RegularExpressions;
 
 namespace Project_AP
 {
@@ -46,14 +47,14 @@ namespace Project_AP
             var user = new List<UserInfo>
             {
                 new UserInfo {
-                    FirstName    = FirstName.Text.ToString(),
-                    LastName     = LastName.Text.ToString(),
-                    NationalCode = NationalCode.Text.ToString(),
-                    CarBrand     = CarBrand.Text.ToString(),
-                    CarDate      = CarDate.Text.ToString(),
-                    CarPlate     = CarPlate.Text.ToString(),
-                    NumPass      = NumofPassenger.Text.ToString(),
-                    PassAge      = Pass_Age.Text.ToString(),
+                    FirstName    = FirstName.Text,
+                    LastName     = LastName.Text,
+                    NationalCode = NationalCode.Text,
+                    CarBrand     = CarBrand.Text,
+                    CarDate      = CarDate.Text,
+                    CarPlate     = CarPlate.Text,
+                    NumPass      = NumofPassenger.Text,
+                    PassAge      = Pass_Age.Text,
                     Date         = DateTime.Now.Date                 
                 },
             };
@@ -69,11 +70,45 @@ namespace Project_AP
             {
                 csv.WriteRecords(user);
             }
-          
-        }
-        private void Plate_valid(string Plate)
-        {
+            Refresh_Method();
 
+        }
+        private bool Validate_Input()
+        {
+            if(          FirstName.Text.Trim()!=""||  LastName.Text.Trim()!=""
+               ||  NationalCode.Text.Trim() != "" || CarBrand.Text.Trim() != ""
+               ||       CarDate.Text.Trim() != "" || CarPlate.Text.Trim() != ""
+               ||NumofPassenger.Text.Trim() != "" || Pass_Age.Text.Trim() != "")
+            {
+                Message_Box("all fields are required");
+                return false;
+            }
+            return true;
+        }
+        private void Message_Box(string Error)
+        {
+            MessageBox.Show(Error);
+        }
+        private bool Plate_valid(string Plate)
+        {
+            if (Plate.Length!=8)
+            {
+                Message_Box("Plate is under 8 char !!!!");
+                return false; ;
+            }
+            Regex alpha = new Regex("^[A-z]*$");
+            if(!alpha.IsMatch(Plate[2].ToString()))
+            {
+                Message_Box("third char is not alphabet!!!!");
+                return false;
+            }
+            Regex numeric = new Regex("^[1-9]*$");
+            if (!numeric.IsMatch(Plate.Substring(0,1)) || !numeric.IsMatch(Plate.Substring(3))) 
+            {
+                Message_Box("Invalid input (using char instead of number !!!!)");
+                return false;
+            }
+            return true;
         }
         public MainWindow()
         {
@@ -83,8 +118,13 @@ namespace Project_AP
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Save_Method();
-            Refresh_Method();
+            var res2 = Validate_Input();
+            var res1 = Plate_valid(CarPlate.Text);
+            if (res1 == true && res2 == true)
+            {
+                Save_Method();
+            }
+          
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
