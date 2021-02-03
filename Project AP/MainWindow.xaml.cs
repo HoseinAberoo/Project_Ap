@@ -23,7 +23,7 @@ namespace Project_AP
 
     public partial class MainWindow : Window
     {
-        string path = @"c:C:\Users\hosei\source\repos\Project AP\Files\Files.txt";
+        string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.txt";
         private void Refresh_Method()
         {
             FirstName.Text = string.Empty;
@@ -35,21 +35,34 @@ namespace Project_AP
             NumofPassenger.SelectedIndex = 0;
             Pass_Age.Text = string.Empty;
         }
+        private void Append_Method(string text)
+        {
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                sw.WriteLine(text);
+                
+            }
+        }
         private void Save_Method()
         {
             var user = new UserInfo();
-            user.FirstName = FirstName.ToString();
-            user.LastName = LastName.ToString();
-            user.NationalCode = NationalCode.ToString();
-            user.CarBrand = CarBrand.ToString();
-            user.CarDate = CarDate.ToString();
-            user.CarPlate = CarPlate.ToString();
-            user.NumPass = NumofPassenger.ToString();
-            user.PassAge = Pass_Age.ToString();
-            File.AppendAllText(path, user.FirstName);
+            user.FirstName = FirstName.ToString().Remove(0, 33);
+            user.LastName = LastName.ToString().Remove(0, 33);
+            user.NationalCode = NationalCode.ToString().Remove(0, 33);
+            user.CarBrand = CarBrand.ToString().Remove(0, 33);
+            user.CarDate = CarDate.ToString().Remove(0, 33);
+            user.CarPlate = CarPlate.ToString().Remove(0, 33);
+            user.NumPass = NumofPassenger.ToString().Remove(0, 45);
+            user.PassAge = Pass_Age.ToString().Remove(0, 33);
+            Append_Method(user.FirstName);
+            Append_Method(user.LastName);
+            Append_Method(user.NationalCode);
+            Append_Method(user.CarBrand);
+            Append_Method(user.CarDate);
+            Append_Method(user.CarPlate);
+            Append_Method(user.NumPass);
+            Append_Method(user.PassAge);
 
-            
-            
         }
 
         public MainWindow()
