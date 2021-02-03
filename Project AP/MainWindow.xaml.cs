@@ -38,14 +38,7 @@ namespace Project_AP
             NumofPassenger.SelectedIndex = 0;
             Pass_Age.Text = string.Empty;
         }
-        private void Append_Method(string text)
-        {
-            using (StreamWriter sw = File.AppendText(path))
-            {
-                sw.WriteLine(text);
-
-            }
-        }
+      
         private void Save_Method()
         {
             // TODO: Ensure headers.
@@ -60,7 +53,8 @@ namespace Project_AP
                     CarDate      = CarDate.Text.ToString(),
                     CarPlate     = CarPlate.Text.ToString(),
                     NumPass      = NumofPassenger.Text.ToString(),
-                    PassAge      = Pass_Age.Text.ToString()
+                    PassAge      = Pass_Age.Text.ToString(),
+                    Date         = DateTime.Now.Date                 
                 },
             };
            
@@ -75,17 +69,12 @@ namespace Project_AP
             {
                 csv.WriteRecords(user);
             }
-            //user.FirstName = FirstName.ToString().Remove(0, 33);
-            //user.LastName = LastName.ToString().Remove(0, 33);
-            //user.NationalCode = NationalCode.ToString().Remove(0, 33);
-            //user.CarBrand = CarBrand.ToString().Remove(0, 33);
-            //user.CarDate = CarDate.ToString().Remove(0, 33);
-            //user.CarPlate = CarPlate.ToString().Remove(0, 33);
-            //user.NumPass = NumofPassenger.ToString().Remove(0, 45);
-            ////user.PassAge = Pass_Age.ToString().Remove(0, 33);
+          
+        }
+        private void Plate_valid(string Plate)
+        {
 
         }
-
         public MainWindow()
         {
             InitializeComponent();

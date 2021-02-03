@@ -16,6 +16,7 @@ namespace Project_AP.Class
         public string CarPlate { get; set; }
         public string  NumPass { get; set; }
         public string PassAge { get; set; }
+        public DateTime Date { get; set; }
 
     }
 }

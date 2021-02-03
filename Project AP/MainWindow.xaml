@@ -39,7 +39,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="FirstName" Grid.Column="0" Margin="5 2 5 2"/>
                             <TextBox x:Name="LastName" Grid.Column="1" Margin="5 2 5 2"/>
-                            <TextBox x:Name="NationalCode" Grid.Column="2" Margin="5 2 5 2"/>
+                            <TextBox x:Name="NationalCode" Grid.Column="2" Margin="5 2 5 2" />
 
                         </Grid>
                         <Grid Margin="10 0 10 0">
