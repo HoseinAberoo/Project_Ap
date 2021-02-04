@@ -157,6 +157,7 @@ namespace Project_AP
             if (res1 == true && res2 == true)
             {
                 Save_Method();
+                Load_Method();
             }
           
         }
@@ -167,7 +168,8 @@ namespace Project_AP
         }
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
-            Refresh_Method();
+            // Note: Basically a search operation on the column 'CarBrand'
+            csvData.DefaultView.RowFilter = string.Format("CarBrand LIKE '%{0}%'", SCarBrand.Text);
         }
 
 
