@@ -29,6 +29,7 @@ namespace Project_AP
     public partial class MainWindow : Window
     {
         string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.csv";
+        DataTable csvData;
         
         private void Refresh_Method()
         {
@@ -41,8 +42,13 @@ namespace Project_AP
             NumofPassenger.SelectedIndex = 0;
             Pass_Age.Text = string.Empty;
         }
+        private bool PlateAndName()
+        {
+            return true;
+        }
         private DataTable Load_Method()
         {
+
             // NOTE: This means that "headers" are required
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -139,14 +145,13 @@ namespace Project_AP
         public MainWindow()
         {
             InitializeComponent();
-
+            csvData = Load_Method();
 
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
            
-            var csvData = Load_Method();
             var res2 = Validate_Input();
             var res1 = Plate_valid(CarPlate.Text);
             if (res1 == true && res2 == true)

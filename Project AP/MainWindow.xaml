@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_AP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="700"
-                           MaxHeight="450" MaxWidth="700"
-                           MinHeight="450" MinWidth="700">
+        Title="MainWindow" Height="800" Width="700"
+                           MaxHeight="800" MaxWidth="700"
+                           MinHeight="800" MinWidth="700">
     <Grid>
         <Grid>
-            <TabControl>
+            <TabControl Margin="0,0,0,-88">
                 <TabItem>
                     <!--Tab New-->
                     <TabItem.Header>
@@ -118,8 +118,98 @@
                             <TextBlock Text="Search" Foreground="Red" Width="50" />
                         </StackPanel>
                     </TabItem.Header>
-                    <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" ItemsSource="{Binding}" />
+                    <StackPanel>
+                        <Grid Margin="10 10 10 0">
+                            <!--Textblock-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  Grid.Column="0" Text="CarBrand :" FontWeight="Bold" Margin="5 0 5 0"/>
+                            <TextBlock Grid.Column="1" Text="First Date:" FontWeight="Bold" Margin="5 0 5 0"/>
+                            <TextBlock Grid.Column="2" Text="Last Date:" FontWeight="Bold" Margin="5 0 5 0"/>
+                        </Grid>
+                        <Grid Margin="10 0 10 10">
+                            <!--TextBox-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="SCarBrand" Grid.Column="0" Margin="5 2 5 2"/>
+                            <TextBox x:Name="SFirstDate" Grid.Column="1" Margin="5 2 5 2"/>
+                            <TextBox x:Name="SLastDate" Grid.Column="2" Margin="5 2 5 2" />
 
+                        </Grid>
+                        <Grid>
+                            <Grid Margin="10 0 10 0">
+                                <!--TextBlock-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock  Grid.Column="0" Text="Min Passenger :" FontWeight="Bold" Margin="5 0 5 0"/>
+                                <TextBlock Grid.Column="1" Text="Max Passenger :" FontWeight="Bold" Margin="5 0 5 0"/>
+                                <TextBlock Grid.Column="2" Text="CarPlate :" FontWeight="Bold" Margin="5 0 5 0"/>
+                            </Grid>
+                        </Grid>
+                        <Grid>
+                            <Grid Margin="15 0 10 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="SMinPass" Grid.Column="0" SelectedIndex="0" Margin="0 0 10 0" >
+                                    <ComboBoxItem>
+                                        1
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        2
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        3
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        4
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        5
+                                    </ComboBoxItem>
+                                </ComboBox>
+                                <ComboBox x:Name="SMaxPass" Grid.Column="1" SelectedIndex="0" Margin="0 0 10 0" >
+                                    <ComboBoxItem>
+                                        1
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        2
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        3
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        4
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        5
+                                    </ComboBoxItem>
+                                </ComboBox>
+                            </Grid>
+                        </Grid>
+                        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" ItemsSource="{Binding}" Margin="6,202,8,0" RenderTransformOrigin="0.5,0.5" Height="167" >
+                            <DataGrid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-0.667"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="1.099"/>
+                                </TransformGroup>
+                            </DataGrid.RenderTransform>
+                        </DataGrid>
+                    </StackPanel>
                 </TabItem>
                 <TabItem>
                     <!--Tab Stats-->
