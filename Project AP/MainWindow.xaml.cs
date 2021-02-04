@@ -30,6 +30,7 @@ namespace Project_AP
     {
         string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.csv";
         DataTable csvData;
+        string nativeplatesquery = "";
         
         private void Refresh_Method()
         {
@@ -134,7 +135,7 @@ namespace Project_AP
                 Message_Box("third char is not alphabet!!!!");
                 return false;
             }
-            Regex numeric = new Regex("^[1-9]*$");
+            Regex numeric = new Regex("^[0-9]*$");
             if (!numeric.IsMatch(Plate.Substring(0,1)) || !numeric.IsMatch(Plate.Substring(3))) 
             {
                 Message_Box("Invalid input (using char instead of number !!!!)");
@@ -146,9 +147,21 @@ namespace Project_AP
         {
             InitializeComponent();
             csvData = Load_Method();
+            FirstDate.SelectedDate = DateTime.Now;
+            LastDate.SelectedDate = DateTime.Now;
 
         }
+        private void GenerateNativePlates()
+        {
+            string qstring = "";
+            List<int> platenumbers = new List<int>() { 11, 22, 33, 44, 55, 66, 77, 88, 99, 10, 20, 30};
 
+            foreach (var pn in platenumbers)
+            {
+                nativeplatesquery += $"CarPlate LIKE '%{pn}' OR ";
+            }
+            
+        }
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
            
@@ -168,17 +181,28 @@ namespace Project_AP
         }
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (nativeplatesquery == "")
+                GenerateNativePlates();
             // Note: Basically a search operation on the column 'CarBrand'
-            csvData.DefaultView.RowFilter = string.Format(
-                "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2}" +
-                "AND Date >= #{3}# AND Date <= #{4}#",
-                SCarBrand.Text,
-                Convert.ToInt32(SMinPass.Text),
-                Convert.ToInt32(SMaxPass.Text),
-                FirstDate.SelectedDate,
-                LastDate.SelectedDate
-                );
-        
+            //csvData.DefaultView.RowFilter = string.Format(
+            //    "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2}" +
+            //    "AND Date >= #{3}# AND Date <= #{4}#" +
+            //    (SNative.Text == "Yes" ? "AND CarPlate LIKE '%99' " : ""),
+            //    SCarBrand.Text,
+            //    Convert.ToInt32(SMinPass.Text),
+            //    Convert.ToInt32(SMaxPass.Text),
+            //    FirstDate.SelectedDate,
+            //    LastDate.SelectedDate
+
+            //);
+
+            csvData.DefaultView.RowFilter = $"CarBrand LIKE '%{SCarBrand.Text}%' AND " +
+                $"NumPass >= {Convert.ToInt32(SMinPass.Text)} AND " +
+                $"NumPass <= {Convert.ToInt32(SMaxPass.Text)} AND " +
+                $"Date >= #{FirstDate.SelectedDate}# AND Date <= #{LastDate.SelectedDate}#" +
+                $"{(SNative.Text == "Yes" ? $"AND {nativeplatesquery} 1 = 2" : "")}";
+
+
         }
 
 
