@@ -32,6 +32,7 @@ namespace Project_AP
         DataTable csvData;
         string nativeplatesquery = "";
         string nonnativeplatesquery = "";
+        int count = 0;
 
 
         private void Refresh_Method()
@@ -193,9 +194,9 @@ namespace Project_AP
 
             nonnativeplatesquery = nonnativeplatesquery.Remove(place, " OR ".Length).Insert(place, "");
         }
-        private void GenericOddPlate()
+        private void Count_Method(ref int count)
         {
-
+            count++;
         }
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -206,6 +207,7 @@ namespace Project_AP
             {
                 Save_Method();
                 Load_Method();
+                Count_Method(ref count);
             }
           
         }
@@ -254,11 +256,14 @@ namespace Project_AP
 
         private void CountInBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            int countin = 2 * count / 3;
+            MessageBox.Show("Count In = {0}",countin.ToString());
         }
 
         private void CountOutBtn_Click(object sender, RoutedEventArgs e)
         {
+            int countin =  count / 3;
+            MessageBox.Show("Count Out = {0}", countin.ToString());
 
         }
     }
