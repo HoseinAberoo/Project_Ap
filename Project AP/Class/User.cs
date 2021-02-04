@@ -17,6 +17,7 @@ namespace Project_AP.Class
         public string  NumPass { get; set; }
         public string PassAge { get; set; }
         public DateTime Date { get; set; }
+        public bool IsOdd { get; set; }
 
     }
 }

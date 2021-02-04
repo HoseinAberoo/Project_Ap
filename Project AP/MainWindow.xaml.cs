@@ -31,7 +31,9 @@ namespace Project_AP
         string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.csv";
         DataTable csvData;
         string nativeplatesquery = "";
-        
+        string nonnativeplatesquery = "";
+
+
         private void Refresh_Method()
         {
             FirstName.Text = string.Empty;
@@ -88,9 +90,15 @@ namespace Project_AP
                     CarPlate     = CarPlate.Text,
                     NumPass      = NumofPassenger.Text,
                     PassAge      = Pass_Age.Text,
-                    Date         = DateTime.Now.Date                 
+                    Date         = DateTime.Now.Date,
+                    IsOdd        = true
+                    
                 },
             };
+            if (Convert.ToInt32(CarPlate.Text[5])%2==0)
+            {
+                user[0].IsOdd = false;
+            }
            
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -160,7 +168,34 @@ namespace Project_AP
             {
                 nativeplatesquery += $"CarPlate LIKE '%{pn}' OR ";
             }
-            
+            int place = nativeplatesquery.LastIndexOf(" OR ");
+
+            if (place == -1)
+                return;
+
+            nativeplatesquery = nativeplatesquery.Remove(place, " OR ".Length).Insert(place, "");
+        }
+        private void GenericNotNative()
+        {
+            string qstring = "";
+            for (int pn=10; pn <100; pn++)
+            {
+                if (pn % 11 != 0 && pn %10!=0)
+                {
+                    nonnativeplatesquery += $"CarPlate  LIKE '%{pn}' OR ";
+
+                }
+            }
+            int place = nonnativeplatesquery.LastIndexOf(" OR ");
+
+            if (place == -1)
+                return;
+
+            nonnativeplatesquery = nonnativeplatesquery.Remove(place, " OR ".Length).Insert(place, "");
+        }
+        private void GenericOddPlate()
+        {
+
         }
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -183,6 +218,9 @@ namespace Project_AP
         {
             if (nativeplatesquery == "")
                 GenerateNativePlates();
+            if (nonnativeplatesquery == "")
+                GenericNotNative();
+
             // Note: Basically a search operation on the column 'CarBrand'
             //csvData.DefaultView.RowFilter = string.Format(
             //    "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2}" +
@@ -195,13 +233,22 @@ namespace Project_AP
             //    LastDate.SelectedDate
 
             //);
+            string q = $"" +
+                $"CarBrand LIKE '%{SCarBrand.Text}%' AND " +
 
-            csvData.DefaultView.RowFilter = $"CarBrand LIKE '%{SCarBrand.Text}%' AND " +
                 $"NumPass >= {Convert.ToInt32(SMinPass.Text)} AND " +
                 $"NumPass <= {Convert.ToInt32(SMaxPass.Text)} AND " +
-                $"Date >= #{FirstDate.SelectedDate}# AND Date <= #{LastDate.SelectedDate}#" +
-                $"{(SNative.Text == "Yes" ? $"AND {nativeplatesquery} 1 = 2" : "")}";
 
+                $"Date >= #{FirstDate.SelectedDate}# AND Date <= #{LastDate.SelectedDate}# " +
+
+                $"{(SNative.Text == "Yes" ? $"AND ({nativeplatesquery})" : "")} " +
+                $"{(SNative.Text == "No" ? $"AND ({nonnativeplatesquery})" : "")} " +
+
+                $"{(Soddoreven.Text == "Odd" ? "AND IsOdd = 'true'" : "")}" +
+                $"{(Soddoreven.Text == "Even" ? "AND IsOdd = 'false'" : "")}";
+
+
+            csvData.DefaultView.RowFilter = q;
 
         }
 
