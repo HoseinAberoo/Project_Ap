@@ -165,11 +165,12 @@ namespace Project_AP
         {
             Refresh_Method();
         }
-
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Refresh_Method();
         }
+
+
     }
 
 }
