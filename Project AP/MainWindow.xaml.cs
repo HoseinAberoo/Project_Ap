@@ -169,7 +169,13 @@ namespace Project_AP
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
             // Note: Basically a search operation on the column 'CarBrand'
-            csvData.DefaultView.RowFilter = string.Format("CarBrand LIKE '%{0}%'", SCarBrand.Text);
+            csvData.DefaultView.RowFilter = string.Format(
+                "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2} ",
+                SCarBrand.Text,
+                Convert.ToInt32(SMinPass.Text),
+                Convert.ToInt32(SMaxPass.Text)
+                );
+        
         }
 
 
