@@ -252,7 +252,15 @@ namespace Project_AP
 
         }
 
+        private void CountInBtn_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void CountOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

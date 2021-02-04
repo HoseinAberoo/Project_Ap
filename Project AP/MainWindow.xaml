@@ -269,6 +269,15 @@
                             <TextBlock Text="Stats" Foreground="Green" Width="50" />
                         </StackPanel>
                     </TabItem.Header>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="CountInRequestBtn" Click="CountInBtn_Click" Grid.Column="0" Content="CountIn" Margin="60 220 60 220"/>
+                        <Button x:Name="CountOutRequestBtn" Click="CountOutBtn_Click" Grid.Column="1" Content="CountOut" Margin="60,220,60,220"/>
+                    </Grid>
 
 
                 </TabItem>
