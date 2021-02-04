@@ -18,6 +18,7 @@ using CsvHelper;
 using System.Globalization;
 using CsvHelper.Configuration;
 using System.Text.RegularExpressions;
+using System.Data;
 
 namespace Project_AP
 {
@@ -28,6 +29,7 @@ namespace Project_AP
     public partial class MainWindow : Window
     {
         string path = @"C:\Users\hosei\source\repos\Project AP\Files\Files.csv";
+        
         private void Refresh_Method()
         {
             FirstName.Text = string.Empty;
@@ -39,9 +41,33 @@ namespace Project_AP
             NumofPassenger.SelectedIndex = 0;
             Pass_Age.Text = string.Empty;
         }
-      
+        private DataTable Load_Method()
+        {
+            // NOTE: This means that "headers" are required
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                PrepareHeaderForMatch = (
+                    string header,
+                    int index
+                ) => header.ToLower()
+            };
+            
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, config))
+            {
+                using (var dr = new CsvDataReader(csv))
+                {
+                    var dt = new DataTable();
+                    dt.Load(dr);
+                    dataGrid.DataContext = dt.DefaultView;
+                    return dt;
+                }
+                
+            }
+        }
         private void Save_Method()
         {
+            
             // TODO: Ensure headers.
 
             var user = new List<UserInfo>
@@ -75,10 +101,10 @@ namespace Project_AP
         }
         private bool Validate_Input()
         {
-            if(          FirstName.Text.Trim()!=""||  LastName.Text.Trim()!=""
-               ||  NationalCode.Text.Trim() != "" || CarBrand.Text.Trim() != ""
-               ||       CarDate.Text.Trim() != "" || CarPlate.Text.Trim() != ""
-               ||NumofPassenger.Text.Trim() != "" || Pass_Age.Text.Trim() != "")
+            if(          FirstName.Text.Trim()==""||  LastName.Text.Trim()==""
+               ||  NationalCode.Text.Trim() == "" || CarBrand.Text.Trim() == ""
+               ||       CarDate.Text.Trim() == "" || CarPlate.Text.Trim() == ""
+               ||NumofPassenger.Text.Trim() == "" || Pass_Age.Text.Trim() == "")
             {
                 Message_Box("all fields are required");
                 return false;
@@ -114,10 +140,13 @@ namespace Project_AP
         {
             InitializeComponent();
 
+
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+           
+            var csvData = Load_Method();
             var res2 = Validate_Input();
             var res1 = Plate_valid(CarPlate.Text);
             if (res1 == true && res2 == true)
@@ -132,6 +161,10 @@ namespace Project_AP
             Refresh_Method();
         }
 
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
 }

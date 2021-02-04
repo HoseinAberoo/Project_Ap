@@ -19,13 +19,13 @@
                         </StackPanel>
                     </TabItem.Header>
                     <StackPanel>
-                    <Grid Margin="10 10 10 0">
+                        <Grid Margin="10 10 10 0">
                             <!--Textblock-->
                             <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             <TextBlock  Grid.Column="0" Text="FirstName :" FontWeight="Bold" Margin="5 0 5 0"/>
                             <TextBlock Grid.Column="1" Text="LastName :" FontWeight="Bold" Margin="5 0 5 0"/>
                             <TextBlock Grid.Column="2" Text="NationalCode :" FontWeight="Bold" Margin="5 0 5 0"/>
@@ -77,7 +77,7 @@
                             </Grid.ColumnDefinitions>
                             <ComboBox x:Name="NumofPassenger" SelectedIndex="0" >
                                 <ComboBoxItem>
-                                    1 
+                                    1
                                 </ComboBoxItem>
                                 <ComboBoxItem>
                                     2
@@ -118,6 +118,7 @@
                             <TextBlock Text="Search" Foreground="Red" Width="50" />
                         </StackPanel>
                     </TabItem.Header>
+                    <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" ItemsSource="{Binding}" />
 
                 </TabItem>
                 <TabItem>
@@ -129,7 +130,9 @@
                         </StackPanel>
                     </TabItem.Header>
 
+
                 </TabItem>
+
             </TabControl>
         </Grid>
     </Grid>
