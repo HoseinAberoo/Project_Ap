@@ -10,7 +10,7 @@
                            MinHeight="500" MinWidth="700">
     <Grid>
         <Grid>
-            <TabControl Margin="0,0,0,-35" HorizontalAlignment="Right" Width="692">
+            <TabControl Margin="0,1,0,-36" HorizontalAlignment="Right" Width="692">
                 <TabItem>
                     <!--Tab New-->
                     <TabItem.Header>
@@ -138,8 +138,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="SCarBrand" Grid.Column="0" Margin="5 2 5 2"/>
-                            <TextBox x:Name="SFirstDate" Grid.Column="1" Margin="5 2 5 2"/>
-                            <TextBox x:Name="SLastDate" Grid.Column="2" Margin="5 2 5 2" />
+                            <DatePicker x:Name="FirstDate" Grid.Column="1" Margin="10 0 10 0" />
+                            <DatePicker x:Name="LastDate" Grid.Column="2" Margin="10 0 10 0" />
 
                         </Grid>
                         <Grid>

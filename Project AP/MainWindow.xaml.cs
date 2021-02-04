@@ -170,10 +170,13 @@ namespace Project_AP
         {
             // Note: Basically a search operation on the column 'CarBrand'
             csvData.DefaultView.RowFilter = string.Format(
-                "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2} ",
+                "CarBrand LIKE '%{0}%' AND NumPass >={1} AND NumPass<={2}" +
+                "AND Date >= #{3}# AND Date <= #{4}#",
                 SCarBrand.Text,
                 Convert.ToInt32(SMinPass.Text),
-                Convert.ToInt32(SMaxPass.Text)
+                Convert.ToInt32(SMaxPass.Text),
+                FirstDate.SelectedDate,
+                LastDate.SelectedDate
                 );
         
         }
